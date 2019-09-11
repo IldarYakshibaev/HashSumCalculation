@@ -28,7 +28,7 @@ namespace HashSumCalculation
 
             while (all_directory.Length != 0)
             {
-                ParameterizedThreadStart parameter = new ParameterizedThreadStart(Flow.FlowRecord);
+                ParameterizedThreadStart parameter = new ParameterizedThreadStart(Flow.FlowCalculationHashSum);
 
                 Thread thread = new Thread(parameter);
                 thread.Start(file_list);
@@ -42,7 +42,12 @@ namespace HashSumCalculation
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Record.RecordInDB(Path.GetDirectoryName(start_directory), start_directory, "", "Не получилось получить доступ к " + start_directory);
+                    Record.RecordInDB(new HashSum {
+                        Path = Path.GetDirectoryName(start_directory),
+                        Title = start_directory,
+                        HashSumFile = "",
+                        TypeError = "Не получилось получить доступ к " + start_directory
+                    });
                     all_directory = all_directory.Skip(1).ToArray();
                 }
             }

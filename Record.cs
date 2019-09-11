@@ -10,14 +10,12 @@ namespace HashSumCalculation
 {
     public class Record
     {
-        public static void RecordInDB(string path, string title, string hashSum, string typeError)
+        public static void RecordInDB(HashSum hashSum)
         {
             // create db context 
             using (HashContext db = new HashContext())
             {
-                HashSum hash = new HashSum { Path = path, Title = title, Hash = hashSum, TypeError = typeError };
-
-                db.HashSums.Add(hash);
+                db.HashSums.Add(hashSum);
 
                 db.SaveChanges();
             }

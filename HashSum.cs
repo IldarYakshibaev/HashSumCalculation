@@ -11,7 +11,7 @@ namespace HashSumCalculation
         public int Id { get; set; }
         public string Path { get; set; }
         public string Title { get; set; }
-        public string Hash { get; set; }
+        public string HashSumFile { get; set; }
         public string TypeError { get; set; }
     }
 }
